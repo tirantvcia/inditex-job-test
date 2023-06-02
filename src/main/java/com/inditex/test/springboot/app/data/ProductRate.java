@@ -1,7 +1,5 @@
 package com.inditex.test.springboot.app.data;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 import com.inditex.test.springboot.app.models.Price;

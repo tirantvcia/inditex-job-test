@@ -1,7 +1,8 @@
 package com.inditex.test.springboot.app;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,29 +11,27 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.inditex.test.springboot.app.data.Brand;
 import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.data.RateSelection;
 import com.inditex.test.springboot.app.repositories.PricesRepository;
-import com.inditex.test.springboot.app.services.ZaraProductRate;
 import com.inditex.test.springboot.app.services.ZaraProductRateService;
 
 @SpringBootTest
 class SpringbootAppApplicationTests {
 
+	@MockBean
 	PricesRepository pricesRepository;
+	
+	@Autowired
 	ZaraProductRateService zaraProductRate;
 
-	@BeforeEach
-	void setup() {
-		pricesRepository = mock(PricesRepository.class);
-		zaraProductRate = new ZaraProductRate(pricesRepository);
-	}
 	
 	@Test
 	@DisplayName("No rate selected when entry is null")
