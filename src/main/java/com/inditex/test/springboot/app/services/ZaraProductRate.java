@@ -1,9 +1,7 @@
 package com.inditex.test.springboot.app.services;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
-import com.inditex.test.springboot.app.data.Brand;
 import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.data.RateSelection;
 import com.inditex.test.springboot.app.models.Price;
