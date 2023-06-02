@@ -1,4 +1,4 @@
-package com.inditex.test.springboot.app.models;
+package com.inditex.test.springboot.app.data;
 
 public enum Brand {
 	ZARA(1, "Zara");

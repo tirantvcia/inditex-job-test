@@ -1,4 +1,4 @@
-package com.inditex.test.springboot.app.models;
+package com.inditex.test.springboot.app.data;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

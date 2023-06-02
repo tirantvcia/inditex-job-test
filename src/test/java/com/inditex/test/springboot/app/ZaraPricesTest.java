@@ -13,9 +13,9 @@ import java.util.Date;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.inditex.test.springboot.app.models.Brand;
-import com.inditex.test.springboot.app.models.ProductRate;
-import com.inditex.test.springboot.app.models.RateSelection;
+import com.inditex.test.springboot.app.data.Brand;
+import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.data.RateSelection;
 
 class ZaraPricesTest {
 

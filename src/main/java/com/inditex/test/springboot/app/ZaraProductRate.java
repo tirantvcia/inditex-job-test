@@ -2,9 +2,9 @@ package com.inditex.test.springboot.app;
 
 import java.time.LocalDateTime;
 
-import com.inditex.test.springboot.app.models.Brand;
-import com.inditex.test.springboot.app.models.ProductRate;
-import com.inditex.test.springboot.app.models.RateSelection;
+import com.inditex.test.springboot.app.data.Brand;
+import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.data.RateSelection;
 
 public class ZaraProductRate {
 
