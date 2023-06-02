@@ -1,4 +1,4 @@
-package com.inditex.test.springboot.app;
+package com.inditex.test.springboot.app.models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

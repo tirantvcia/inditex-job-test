@@ -2,6 +2,10 @@ package com.inditex.test.springboot.app;
 
 import java.time.LocalDateTime;
 
+import com.inditex.test.springboot.app.models.Brand;
+import com.inditex.test.springboot.app.models.ProductRate;
+import com.inditex.test.springboot.app.models.RateSelection;
+
 public class ZaraProductRate {
 
 	public static ProductRate getProductRate(RateSelection entry) {

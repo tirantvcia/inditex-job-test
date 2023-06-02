@@ -1,8 +1,10 @@
-package com.inditex.test.springboot.app;
+package com.inditex.test.springboot.app.models;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+
+
 
 public class ProductRate {
 
