@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import com.inditex.test.springboot.app.models.Price;
+
 
 
 public class ProductRate {
 
-	private Integer productId;
-	private Integer priceList;
+	private Long productId;
+	private Long priceList;
 	private Brand brand;
 	private Date startDate;
 	private Date endDate;
@@ -22,30 +24,33 @@ public class ProductRate {
 	
 	
 
-	public ProductRate(Integer productId, Integer priceList, Brand brand, LocalDateTime startDateTime, LocalDateTime endDateTime,
+	private ProductRate(Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,
 			Double price) {
 		this.productId = productId;
 		this.priceList = priceList;
 		this.brand = brand;
-		this.startDate = convertToDate(startDateTime);
-		this.endDate = convertToDate(endDateTime);
+		this.startDate = startDateTime;
+		this.endDate = endDateTime;
 		this.price = price;
 	}
 	
 	
-	private Date convertToDate(LocalDateTime dateToConvert) {
-	    return java.util.Date
-	      .from(dateToConvert.atZone(ZoneId.systemDefault())
-	      .toInstant());
+	public static ProductRate create(Price p) {
+		if(p != null) {
+			return new ProductRate(p.getProductId(), p.getId()
+					, Brand.valueOfCode(p.getBrandId()), p.getStartDate(), p.getEndDate(), p.getPrice());
+					
+		}
+		return new ProductRate();
 	}
 
 
 
-	public Integer getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public Integer getPriceList() {
+	public Long getPriceList() {
 		return priceList;
 	}
 

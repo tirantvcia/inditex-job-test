@@ -27,6 +27,15 @@ public enum Brand {
 		this.description = description;
 	}
 	
+	public static Brand valueOfCode(int code) {
+        for(Brand b: values()) {
+            if(b.code == code) {
+                return b;
+            }
+        }
+        return null;
+	}
+	
 	
 	
 }

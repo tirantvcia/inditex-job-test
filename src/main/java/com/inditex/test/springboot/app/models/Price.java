@@ -3,18 +3,71 @@ package com.inditex.test.springboot.app.models;
 import java.util.Currency;
 import java.util.Date;
 
+import com.inditex.test.springboot.app.data.Brand;
+
 public class Price {
 	private Long id;
 	private Integer brandId;
 	private Date startDate;
 	private Date endDate;
-	private Integer priceList;
 	private Long productId;
 	private int priority;
 	private Double price;
 	private Currency currency;
 	
 	
+	public Price() {
+	}
+
+	
+	
+	public Price(Long id, Brand brand, Date startDate, Date endDate, Long productId, int priority,
+			Double price, Currency currency) {
+		this.id = id;
+		this.brandId = brand.getCode();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.productId = productId;
+		this.priority = priority;
+		this.price = price;
+		this.currency = currency;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public Integer getBrandId() {
+		return brandId;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -23,7 +76,7 @@ public class Price {
 		result = prime * result + ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((priceList == null) ? 0 : priceList.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + priority;
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
@@ -59,10 +112,10 @@ public class Price {
 				return false;
 		} else if (!price.equals(other.price))
 			return false;
-		if (priceList == null) {
-			if (other.priceList != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!priceList.equals(other.priceList))
+		} else if (!id.equals(other.id))
 			return false;
 		if (priority != other.priority)
 			return false;
