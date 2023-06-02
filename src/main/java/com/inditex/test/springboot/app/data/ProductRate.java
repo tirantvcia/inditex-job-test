@@ -2,6 +2,7 @@ package com.inditex.test.springboot.app.data;
 
 import java.util.Date;
 
+import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
 
 
@@ -36,7 +37,7 @@ public class ProductRate {
 	public static ProductRate create(Price p) {
 		if(p != null) {
 			return new ProductRate(p.getProductId(), p.getId()
-					, Brand.valueOfCode(p.getBrandId()), p.getStartDate(), p.getEndDate(), p.getPrice());
+					, p.getBrand(), p.getStartDate(), p.getEndDate(), p.getPrice());
 					
 		}
 		return new ProductRate();

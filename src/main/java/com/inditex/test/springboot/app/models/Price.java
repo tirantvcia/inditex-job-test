@@ -3,11 +3,27 @@ package com.inditex.test.springboot.app.models;
 import java.util.Currency;
 import java.util.Date;
 
-import com.inditex.test.springboot.app.data.Brand;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="PRICES")
 public class Price {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Integer brandId;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="brand_id")
+	private Brand brand;
+	
 	private Date startDate;
 	private Date endDate;
 	private Long productId;
@@ -24,7 +40,7 @@ public class Price {
 	public Price(Long id, Brand brand, Date startDate, Date endDate, Long productId, int priority,
 			Double price, Currency currency) {
 		this.id = id;
-		this.brandId = brand.getCode();
+		this.brand = brand;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.productId = productId;
@@ -39,8 +55,8 @@ public class Price {
 		return id;
 	}
 
-	public Integer getBrandId() {
-		return brandId;
+	public Brand getBrand() {
+		return brand;
 	}
 
 	public Date getStartDate() {
@@ -67,12 +83,62 @@ public class Price {
 	public Currency getCurrency() {
 		return currency;
 	}
+	
+	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
@@ -92,10 +158,10 @@ public class Price {
 		if (getClass() != obj.getClass())
 			return false;
 		Price other = (Price) obj;
-		if (brandId == null) {
-			if (other.brandId != null)
+		if (brand == null) {
+			if (other.brand != null)
 				return false;
-		} else if (!brandId.equals(other.brandId))
+		} else if (!brand.equals(other.brand))
 			return false;
 		if (currency == null) {
 			if (other.currency != null)

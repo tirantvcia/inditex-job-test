@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.inditex.test.springboot.app.data.Brand;
 import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.data.RateSelection;
 import com.inditex.test.springboot.app.repositories.PricesRepository;
@@ -82,7 +81,7 @@ class SpringbootAppApplicationTests {
 		
 		assertEquals(35455L, rate.getProductId());
 		assertEquals(1, rate.getPriceList());
-		assertEquals(Brand.ZARA, rate.getBrand());
+		assertEquals(1, rate.getBrand().getId());
 		assertEquals(convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), rate.getStartDate());
 		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), rate.getEndDate());
 		assertEquals(35.50, rate.getPrice());
