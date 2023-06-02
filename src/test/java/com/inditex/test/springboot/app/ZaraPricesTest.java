@@ -1,6 +1,8 @@
 package com.inditex.test.springboot.app;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.Date;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.ProductRate;
 import com.inditex.test.springboot.app.models.RateSelection;
 
