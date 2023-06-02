@@ -39,7 +39,15 @@ class SpringbootAppApplicationTests {
 	void emptyProductRateForNullSelection() {
 		RateSelection entry = null;
 		ProductRate rate = zaraProductRate.getProductRate(entry);
-		assertNull(rate);
+		assertNotNull(rate);
+		
+		assertEquals(null, rate.getProductId());
+		assertEquals(null, rate.getPriceList());
+		assertEquals(null, rate.getBrand());
+		assertEquals(null, rate.getStartDate());
+		assertEquals(null, rate.getEndDate());
+		assertEquals(null, rate.getPrice());
+
 	}
 	
 	@Test

@@ -25,7 +25,7 @@ public class ZaraProductRate implements ZaraProductRateService {
 	public ProductRate getProductRate(RateSelection entry) {
 		
 		if(entry == null) {
-			return null;
+			return ProductRate.create(null);
 		}
 		Optional<Price> findFirstPriceRateBySelectionEntry = 
 				this.pricesRepository.findFirstPriceRateBySelectionEntry(entry);
