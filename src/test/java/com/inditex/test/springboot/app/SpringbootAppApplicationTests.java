@@ -43,6 +43,27 @@ class SpringbootAppApplicationTests {
 	}
 	
 	@Test
+	@DisplayName("Return empty rate when priceList is not selected")
+	void emptyProductRateForNoPriceSelection() {
+		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14),
+				LocalTime.of(10,00), 34455, 1);
+		
+		when(pricesRepository.findFirstPriceRateBySelectionEntry(entry)).thenReturn(Optional.ofNullable(null));
+		
+		ProductRate rate = zaraProductRate.getProductRate(entry);
+		
+		assertNotNull(rate);
+		
+		assertEquals(null, rate.getProductId());
+		assertEquals(null, rate.getPriceList());
+		assertEquals(null, rate.getBrand());
+		assertEquals(null, rate.getStartDate());
+		assertEquals(null, rate.getEndDate());
+		assertEquals(null, rate.getPrice());
+
+	}
+	
+	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
 		RateSelection entry = new RateSelection(LocalDate.of(2014, 3, 14),

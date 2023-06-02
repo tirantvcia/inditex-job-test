@@ -30,7 +30,8 @@ public class ZaraProductRate implements ZaraProductRateService {
 		Optional<Price> findFirstPriceRateBySelectionEntry = 
 				this.pricesRepository.findFirstPriceRateBySelectionEntry(entry);
 		
-		return findFirstPriceRateBySelectionEntry.map(ProductRate::create).get();
+		return findFirstPriceRateBySelectionEntry.map(ProductRate::create)
+				.orElse(ProductRate.create(null));
 		
 
 	}
