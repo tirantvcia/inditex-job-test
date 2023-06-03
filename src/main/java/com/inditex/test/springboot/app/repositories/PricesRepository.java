@@ -12,7 +12,7 @@ import com.inditex.test.springboot.app.models.Price;
 public interface PricesRepository extends JpaRepository<Price, Long>{
 	
 
-	@Query("select p from price p where p.startDate <= :petitionDate and p.endDate >= :petitionDate and p.productId = :productId and p.brand = :brandId order by p.priority limit 1")
+	@Query("select p from Price p where p.startDate <= :petitionDate and p.endDate >= :petitionDate and p.productId = :productId and p.brand.id = :brandId order by p.priority")
 	public Optional<Price> findFirstPriceRateBySelectionEntry(@Param("petitionDate") Date petitionDate, @Param("productId") Long productId, @Param("brandId") Long brandId);
 
 }
