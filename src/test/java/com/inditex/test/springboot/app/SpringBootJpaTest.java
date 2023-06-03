@@ -116,7 +116,24 @@ public class SpringBootJpaTest {
 		assertEquals(35.50, price.getPrice());
 	}
 	
-	
+	@Test
+	@DisplayName("petición a las 10:00 del día 15 del producto 35455 para la brand 1")
+	void checkProductRatesForDate15at10Oclock() {
+		
+		
+		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 15),
+					LocalTime.of(10,00), 35455L, 1L);
+		
+		List<Price> findFirstPriceRateBySelectionEntry = 
+				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+		
+		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
+		
+		assertEquals(35455L, price.getProductId());
+		assertEquals(3, price.getId());
+		assertEquals(1, price.getBrand().getId());
+		assertEquals(30.50, price.getPrice());
+	}
 	private Date convertToDate(LocalDateTime dateToConvert) {
 	    return java.util.Date
 	      .from(dateToConvert.atZone(ZoneId.systemDefault())
