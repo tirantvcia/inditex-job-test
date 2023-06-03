@@ -43,16 +43,16 @@ public class SpringBootJpaTest {
 		List<Price> findFirstPriceRateBySelectionEntry = 
 				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
-		Price rate =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
+		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
-		assertNotNull(rate);
+		assertNotNull(price);
 		
-		assertNull(rate.getProductId());
-		assertNull(rate.getId());
-		assertNull(rate.getBrand());
-		assertNull(rate.getStartDate());
-		assertNull(rate.getEndDate());
-		assertNull(rate.getPrice());
+		assertNull(price.getProductId());
+		assertNull(price.getId());
+		assertNull(price.getBrand());
+		assertNull(price.getStartDate());
+		assertNull(price.getEndDate());
+		assertNull(price.getPrice());
 
 	}
 	
@@ -67,14 +67,14 @@ public class SpringBootJpaTest {
 		List<Price> findFirstPriceRateBySelectionEntry = 
 				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
-		Price rate =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
+		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
-		assertEquals(35455L, rate.getProductId());
-		assertEquals(1, rate.getId());
-		assertEquals(1, rate.getBrand().getId());
-		assertEquals(convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), rate.getStartDate());
-		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), rate.getEndDate());
-		assertEquals(35.50, rate.getPrice());
+		assertEquals(35455L, price.getProductId());
+		assertEquals(1, price.getId());
+		assertEquals(1, price.getBrand().getId());
+		assertEquals(convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), price.getStartDate());
+		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), price.getEndDate());
+		assertEquals(35.50, price.getPrice());
 	}
 
 	@Test
@@ -88,12 +88,12 @@ public class SpringBootJpaTest {
 		List<Price> findFirstPriceRateBySelectionEntry = 
 				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
-		Price rate =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
+		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
-		assertEquals(35455L, rate.getProductId());
-		assertEquals(2, rate.getId());
-		assertEquals(1, rate.getBrand().getId());
-		assertEquals(25.45, rate.getPrice());
+		assertEquals(35455L, price.getProductId());
+		assertEquals(2, price.getId());
+		assertEquals(1, price.getBrand().getId());
+		assertEquals(25.45, price.getPrice());
 	}	
 	
 	private Date convertToDate(LocalDateTime dateToConvert) {
