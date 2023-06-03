@@ -3,6 +3,7 @@ package com.inditex.test.springboot.app.models;
 import java.util.Currency;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -24,11 +24,17 @@ public class Price {
 	@JoinColumn(name="brand_id")
 	private Brand brand;
 	
+	@Column(name = "START_DATE")
 	private Date startDate;
+	@Column(name = "END_DATE")
 	private Date endDate;
+	@Column(name = "PRODUCT_ID")
 	private Long productId;
+	@Column(name = "PRIORITY")
 	private int priority;
+	@Column(name = "PRICE")
 	private Double price;
+	@Column(name = "CURR")
 	private Currency currency;
 	
 	
