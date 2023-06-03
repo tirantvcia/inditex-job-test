@@ -1,8 +1,14 @@
 package com.inditex.test.springboot.app.services;
 
+import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.inditex.test.springboot.app.data.ProductRate;
@@ -29,11 +35,11 @@ public class ZaraProductRate implements ZaraProductRateService {
 		if(petition == null) {
 			return ProductRate.create(null);
 		}
-		Optional<Price> findFirstPriceRateBySelectionEntry = 
-				this.pricesRepository.findFirstPriceRateBySelectionEntry(petition.getDate(), petition.getProduct(), petition.getBrand());
+		List<Price> findPriceRateBySelectionEntryPage = 
+				this.pricesRepository.findPriceRatesBySelectionEntry(petition.getDate(), petition.getProduct(), petition.getBrand());
 		
-		return findFirstPriceRateBySelectionEntry.map(ProductRate::create)
-				.orElse(ProductRate.create(null));
+		return (findPriceRateBySelectionEntryPage != null && !findPriceRateBySelectionEntryPage.isEmpty())?
+				findPriceRateBySelectionEntryPage.stream().map(ProductRate::create).findFirst().get():new ProductRate();		
 		
 
 	}

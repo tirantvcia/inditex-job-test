@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ class SpringbootAppApplicationTests {
 		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14),
 				LocalTime.of(10,00), 34455L, 1L);
 		
-		when(pricesRepository.findFirstPriceRateBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(Optional.ofNullable(null));
+		when(pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(null);
 		
 		ProductRate rate = zaraProductRate.getProductRate(entry);
 		
@@ -75,7 +74,9 @@ class SpringbootAppApplicationTests {
 		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14),
 				LocalTime.of(10,00), 34455L, 1L);
 		
-		when(pricesRepository.findFirstPriceRateBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(Optional.of(TestData.PRICE_LIST_1));
+		
+		when(pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand()))
+		.thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
 		
 		ProductRate rate = zaraProductRate.getProductRate(entry);
 		

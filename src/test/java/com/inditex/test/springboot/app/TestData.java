@@ -3,6 +3,11 @@ package com.inditex.test.springboot.app;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.assertj.core.util.Arrays;
 
 import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
@@ -29,11 +34,15 @@ public class TestData {
 			convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59))
 			, 35455L, 1, 38.95, "EUR");
 	
+	public static final List<Price> PRICE_RESULT_LIST_FOR_PETITION_1 = Stream.of(PRICE_LIST_1).collect(Collectors.toList());
+	
 	private static Date convertToDate(LocalDateTime dateToConvert) {
 	    return java.util.Date
 	      .from(dateToConvert.atZone(ZoneId.systemDefault())
 	      .toInstant());
 	}
+	
+	
 			
 			
 }
