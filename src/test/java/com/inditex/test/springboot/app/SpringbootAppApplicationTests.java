@@ -72,7 +72,7 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
-		RateSelection entry = new RateSelection(LocalDate.of(2014, 3, 14),
+		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14),
 				LocalTime.of(10,00), 34455L, 1L);
 		
 		when(pricesRepository.findFirstPriceRateBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(Optional.of(TestData.PRICE_LIST_1));

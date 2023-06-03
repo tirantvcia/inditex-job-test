@@ -1,6 +1,5 @@
 package com.inditex.test.springboot.app.models;
 
-import java.util.Currency;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -39,7 +38,7 @@ public class Price {
 	@Column(name = "PRICE")
 	private Double price;
 	@Column(name = "CURR")
-	private Currency currency;
+	private String currency;
 	
 	
 	public Price() {
@@ -48,7 +47,7 @@ public class Price {
 	
 	
 	public Price(Long id, Brand brand, Date startDate, Date endDate, Long productId, int priority,
-			Double price, Currency currency) {
+			Double price, String currency) {
 		this.id = id;
 		this.brand = brand;
 		this.startDate = startDate;
@@ -90,7 +89,7 @@ public class Price {
 		return price;
 	}
 
-	public Currency getCurrency() {
+	public String getCurrency() {
 		return currency;
 	}
 	
@@ -138,7 +137,7 @@ public class Price {
 
 
 
-	public void setCurrency(Currency currency) {
+	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 
