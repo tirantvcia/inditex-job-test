@@ -24,13 +24,13 @@ public class ZaraProductRate implements ZaraProductRateService {
 
 
 	@Override
-	public ProductRate getProductRate(RateSelection entry) {
+	public ProductRate getProductRate(RateSelection petition) {
 		
-		if(entry == null) {
+		if(petition == null) {
 			return ProductRate.create(null);
 		}
 		Optional<Price> findFirstPriceRateBySelectionEntry = 
-				this.pricesRepository.findFirstPriceRateBySelectionEntry(entry);
+				this.pricesRepository.findFirstPriceRateBySelectionEntry(petition.getDate(), petition.getProduct(), petition.getBrand());
 		
 		return findFirstPriceRateBySelectionEntry.map(ProductRate::create)
 				.orElse(ProductRate.create(null));

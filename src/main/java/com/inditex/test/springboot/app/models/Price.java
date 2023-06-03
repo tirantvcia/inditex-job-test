@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="PRICES")
@@ -25,8 +27,10 @@ public class Price {
 	private Brand brand;
 	
 	@Column(name = "START_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
 	@Column(name = "END_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	@Column(name = "PRODUCT_ID")
 	private Long productId;
