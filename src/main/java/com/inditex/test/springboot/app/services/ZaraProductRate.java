@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.data.RateSelection;
@@ -30,6 +31,7 @@ public class ZaraProductRate implements ZaraProductRateService {
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public ProductRate getProductRate(RateSelection petition) {
 		
 		if(petition == null) {
