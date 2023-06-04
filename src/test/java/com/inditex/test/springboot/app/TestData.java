@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import org.assertj.core.util.Arrays;
 
+import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
 
@@ -35,6 +36,9 @@ public class TestData {
 			, 35455L, 1, 38.95, "EUR");
 	
 	public static final List<Price> PRICE_RESULT_LIST_FOR_PETITION_1 = Stream.of(PRICE_LIST_1).collect(Collectors.toList());
+	
+//	Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,Double price
+	public static final ProductRate PRODUCT_RATE_1 = ProductRate.create(PRICE_LIST_1);
 	
 	private static Date convertToDate(LocalDateTime dateToConvert) {
 	    return java.util.Date

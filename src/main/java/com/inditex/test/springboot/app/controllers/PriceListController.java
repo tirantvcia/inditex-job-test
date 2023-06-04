@@ -29,7 +29,7 @@ public class PriceListController {
 	}
 	
 	
-	
+
 	@GetMapping("/getMostPriorityPriceBySelection")
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<?> getMostPriorityPriceBySelection(@RequestBody RateSelection rateSelection) {
