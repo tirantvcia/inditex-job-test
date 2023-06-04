@@ -1,10 +1,8 @@
 package com.inditex.test.springboot.app.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,6 +34,7 @@ class PriceListControllerTest {
 	private ZaraProductRateService service;
 	
 	ObjectMapper objectMapper;
+	
 	@BeforeEach
 	public void setup () {
 		objectMapper = new ObjectMapper();
@@ -47,7 +46,7 @@ class PriceListControllerTest {
 		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14),
 				LocalTime.of(10,00), 35455L, 1L);
 		
-		when(service.getProductRate(entry)).thenReturn(TestData.PRODUCT_RATE_1);
+		when(service.findMostPriorityPriceBySelection(entry)).thenReturn(TestData.PRODUCT_RATE_1);
 		
 
 		
@@ -58,7 +57,7 @@ class PriceListControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.priceList").value(1))
 				.andExpect(jsonPath("$.price").value(35.50));
-		verify(service).getProductRate(entry);
+		verify(service).findMostPriorityPriceBySelection(entry);
 		
 	}
 

@@ -5,6 +5,6 @@ import com.inditex.test.springboot.app.data.RateSelection;
 
 public interface ZaraProductRateService {
 
-	ProductRate getProductRate(RateSelection entry);
+	ProductRate findMostPriorityPriceBySelection(RateSelection entry);
 
 }

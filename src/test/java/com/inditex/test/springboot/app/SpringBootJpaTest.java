@@ -35,7 +35,7 @@ public class SpringBootJpaTest {
 				LocalTime.of(10,00), 34455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
@@ -59,7 +59,7 @@ public class SpringBootJpaTest {
 					LocalTime.of(10,00), 35455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
@@ -80,7 +80,7 @@ public class SpringBootJpaTest {
 					LocalTime.of(16,00), 35455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
@@ -100,7 +100,7 @@ public class SpringBootJpaTest {
 					LocalTime.of(21,00), 35455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
@@ -119,7 +119,7 @@ public class SpringBootJpaTest {
 					LocalTime.of(10,00), 35455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		
@@ -138,7 +138,7 @@ public class SpringBootJpaTest {
 					LocalTime.of(21,00), 35455L, 1L);
 		
 		List<Price> findFirstPriceRateBySelectionEntry = 
-				pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand());
+				pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 		
 		Price price =  findFirstPriceRateBySelectionEntry.stream().findFirst().orElse(new Price());	
 		

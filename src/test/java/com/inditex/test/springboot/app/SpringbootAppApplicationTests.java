@@ -35,7 +35,7 @@ class SpringbootAppApplicationTests {
 	@DisplayName("No rate selected when entry is null")
 	void emptyProductRateForNullSelection() {
 		RateSelection entry = null;
-		ProductRate rate = zaraProductRate.getProductRate(entry);
+		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		assertNotNull(rate);
 		
 		assertEquals(null, rate.getProductId());
@@ -53,9 +53,9 @@ class SpringbootAppApplicationTests {
 		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14),
 				LocalTime.of(10,00), 34455L, 1L);
 		
-		when(pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(null);
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(null);
 		
-		ProductRate rate = zaraProductRate.getProductRate(entry);
+		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		
 		assertNotNull(rate);
 		
@@ -75,10 +75,10 @@ class SpringbootAppApplicationTests {
 				LocalTime.of(10,00), 34455L, 1L);
 		
 		
-		when(pricesRepository.findPriceRatesBySelectionEntry(entry.getDate(), entry.getProduct(), entry.getBrand()))
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand()))
 		.thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
 		
-		ProductRate rate = zaraProductRate.getProductRate(entry);
+		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		
 		assertEquals(35455L, rate.getProductId());
 		assertEquals(1, rate.getPriceList());
