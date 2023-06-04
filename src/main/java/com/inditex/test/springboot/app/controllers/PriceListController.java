@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inditex.test.springboot.app.data.ProductRate;
 import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
-import com.inditex.test.springboot.app.services.ZaraProductRateService;
+import com.inditex.test.springboot.app.services.Facade;
 
 @RestController
 @RequestMapping("/test/prices")
 public class PriceListController {
 
 	
-	private	ZaraProductRateService service;
+	private	Facade facade;
 
 	public PriceListController() {
 	}
@@ -31,8 +31,8 @@ public class PriceListController {
 
 
 	@Autowired
-	public PriceListController(ZaraProductRateService service) {
-		this.service = service;
+	public PriceListController(Facade facade) {
+		this.facade = facade;
 	}
 	
 	
@@ -43,20 +43,14 @@ public class PriceListController {
 			@RequestParam("time") String time,
             @RequestParam("productId") Long productId,
             @RequestParam("brandId") Long brandId) {
-		Brand Brand_ZARA = new Brand(1L, "ZARA");
-		Price PRICE_LIST_1 = new Price(1L, Brand_ZARA, 
-				convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), 
-				convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59))
-				, 35455L, 0, 35.5, "EUR");
-		ProductRate PRODUCT_RATE_1 = ProductRate.create(PRICE_LIST_1);
 		
-	return ResponseEntity.ok(PRODUCT_RATE_1);
+		ProductRate mostPriorityPriceBySelection = facade.findMostPriorityPriceBySelection(date, time, productId, brandId);
+		
+		
+		
+	return ResponseEntity.ok(mostPriorityPriceBySelection);
 		
 		
 	}
-	private static Date convertToDate(LocalDateTime dateToConvert) {
-	    return java.util.Date
-	      .from(dateToConvert.atZone(ZoneId.systemDefault())
-	      .toInstant());
-	}
+
 }

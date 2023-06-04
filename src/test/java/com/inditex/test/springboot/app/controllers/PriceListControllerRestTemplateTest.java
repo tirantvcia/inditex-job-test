@@ -50,7 +50,7 @@ public class PriceListControllerRestTemplateTest {
 
 		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
 
-		String date = "14, 06, 2020";
+		String date = "14-06-2020";
 		String time = "10:00;00";
 		Long productId = 35455L;
 		Long brandId = 1L;
