@@ -39,6 +39,9 @@ public class TestData {
 	
 //	Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,Double price
 	public static final ProductRate PRODUCT_RATE_1 = ProductRate.create(PRICE_LIST_1);
+	public static final ProductRate PRODUCT_RATE_2 = ProductRate.create(PRICE_LIST_2);
+	public static final ProductRate PRODUCT_RATE_3 = ProductRate.create(PRICE_LIST_3);
+	public static final ProductRate PRODUCT_RATE_4 = ProductRate.create(PRICE_LIST_4);
 	
 	private static Date convertToDate(LocalDateTime dateToConvert) {
 	    return java.util.Date

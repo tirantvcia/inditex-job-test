@@ -47,7 +47,6 @@ public class PriceListControllerRestTemplateTest {
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void getMostPriorityPriceBySelection() throws Exception {
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 35455L, 1L);
 
 		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
 
@@ -72,6 +71,32 @@ public class PriceListControllerRestTemplateTest {
 		assertTrue(TestData.PRODUCT_RATE_1.equals(productRate));
 
 	}
+	@Test
+	@DisplayName("petición a las 16:00 del día 14 del producto 35455 para la brand 1")
+	void checkProductRatesForDate14at16Oclock() {
+
+		
+		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
+
+		String date = "14, 06, 2020";
+		String time = "16:00;00";
+		Long productId = 35455L;
+		Long brandId = 1L;
+		UriComponentsBuilder builder = initComponentBuilder(url, date, time, productId, brandId);
+
+		HttpEntity requestEntity = getHeaders();
+
+		ResponseEntity<ProductRate> response = involeUriExchange(builder, requestEntity);
+
+		ProductRate productRate = response.getBody();
+		assertNotNull(productRate);
+		assertNotNull(response.getBody());
+		
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
+
+		assertTrue(TestData.PRODUCT_RATE_2.equals(productRate));		
+	}	
 
 	private String getUri(String uri) {
 		return "http://localhost:" + puerto + uri;
