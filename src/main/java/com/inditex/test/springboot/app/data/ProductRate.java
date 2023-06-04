@@ -5,8 +5,6 @@ import java.util.Date;
 import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
 
-
-
 public class ProductRate {
 
 	private Long productId;
@@ -15,13 +13,9 @@ public class ProductRate {
 	private Date startDate;
 	private Date endDate;
 	private Double price;
-	
-	
 
 	public ProductRate() {
 	}
-	
-	
 
 	private ProductRate(Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,
 			Double price) {
@@ -32,18 +26,15 @@ public class ProductRate {
 		this.endDate = endDateTime;
 		this.price = price;
 	}
-	
-	
+
 	public static ProductRate create(Price p) {
-		if(p != null) {
-			return new ProductRate(p.getProductId(), p.getId()
-					, p.getBrand(), p.getStartDate(), p.getEndDate(), p.getPrice());
-					
+		if (p != null) {
+			return new ProductRate(p.getProductId(), p.getId(), p.getBrand(), p.getStartDate(), p.getEndDate(),
+					p.getPrice());
+
 		}
 		return new ProductRate();
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -54,8 +45,6 @@ public class ProductRate {
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -83,8 +72,6 @@ public class ProductRate {
 			return false;
 		return true;
 	}
-
-
 
 	public Long getProductId() {
 		return productId;

@@ -29,36 +29,30 @@ class PriceListControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
-	
+
 	@MockBean
 	private ZaraProductRateService service;
-	
+
 	ObjectMapper objectMapper;
-	
+
 	@BeforeEach
-	public void setup () {
+	public void setup() {
 		objectMapper = new ObjectMapper();
 	}
-	
+
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void getMostPriorityPriceBySelection() throws Exception {
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14),
-				LocalTime.of(10,00), 35455L, 1L);
-		
-		when(service.findMostPriorityPriceBySelection(entry)).thenReturn(TestData.PRODUCT_RATE_1);
-		
+		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 35455L, 1L);
 
-		
-		mvc.perform(get("/test/prices/getMostPriorityPriceBySelection")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(entry)))
-				.andExpect(status().isOk())
+		when(service.findMostPriorityPriceBySelection(entry)).thenReturn(TestData.PRODUCT_RATE_1);
+
+		mvc.perform(get("/test/prices/getMostPriorityPriceBySelection").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(entry))).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.priceList").value(1))
-				.andExpect(jsonPath("$.price").value(35.50));
+				.andExpect(jsonPath("$.priceList").value(1)).andExpect(jsonPath("$.price").value(35.50));
 		verify(service).findMostPriorityPriceBySelection(entry);
-		
+
 	}
 
 }

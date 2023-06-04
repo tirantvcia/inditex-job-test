@@ -13,36 +13,30 @@ import com.inditex.test.springboot.app.repositories.PricesRepository;
 
 @Service
 public class ZaraProductRateServiceImpl implements ZaraProductRateService {
-	
 
 	private PricesRepository pricesRepository;
-	
 
 	public ZaraProductRateServiceImpl() {
 	}
 
-
-
-	@Autowired	
+	@Autowired
 	public ZaraProductRateServiceImpl(PricesRepository pricesRepository) {
 		this.pricesRepository = pricesRepository;
 	}
 
-
-
 	@Override
 	@Transactional(readOnly = true)
 	public ProductRate findMostPriorityPriceBySelection(RateSelection petition) {
-		
-		if(petition == null) {
+
+		if (petition == null) {
 			return ProductRate.create(null);
 		}
-		List<Price> findPriceRateBySelectionEntry = 
-				this.pricesRepository.findPricesBySelectionOrderedByPrioriry(petition.getDate(), petition.getProduct(), petition.getBrand());
-		
-		return (findPriceRateBySelectionEntry != null && !findPriceRateBySelectionEntry.isEmpty())?
-				findPriceRateBySelectionEntry.stream().map(ProductRate::create).findFirst().get():new ProductRate();		
-		
+		List<Price> findPriceRateBySelectionEntry = this.pricesRepository
+				.findPricesBySelectionOrderedByPrioriry(petition.getDate(), petition.getProduct(), petition.getBrand());
+
+		return (findPriceRateBySelectionEntry != null && !findPriceRateBySelectionEntry.isEmpty())
+				? findPriceRateBySelectionEntry.stream().map(ProductRate::create).findFirst().get()
+				: new ProductRate();
 
 	}
 

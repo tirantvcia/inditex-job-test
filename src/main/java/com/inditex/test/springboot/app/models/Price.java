@@ -15,16 +15,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="PRICES")
+@Table(name = "PRICES")
 public class Price {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="brand_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "brand_id")
 	private Brand brand;
-	
+
 	@Column(name = "START_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
@@ -39,15 +39,12 @@ public class Price {
 	private Double price;
 	@Column(name = "CURR")
 	private String currency;
-	
-	
+
 	public Price() {
 	}
 
-	
-	
-	public Price(Long id, Brand brand, Date startDate, Date endDate, Long productId, int priority,
-			Double price, String currency) {
+	public Price(Long id, Brand brand, Date startDate, Date endDate, Long productId, int priority, Double price,
+			String currency) {
 		this.id = id;
 		this.brand = brand;
 		this.startDate = startDate;
@@ -57,8 +54,6 @@ public class Price {
 		this.price = price;
 		this.currency = currency;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -76,7 +71,6 @@ public class Price {
 		return endDate;
 	}
 
-
 	public Long getProductId() {
 		return productId;
 	}
@@ -92,56 +86,38 @@ public class Price {
 	public String getCurrency() {
 		return currency;
 	}
-	
-	
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-
-
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-
-
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
-
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
-
-
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-
-
 
 	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-
-
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -157,7 +133,7 @@ public class Price {
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -206,6 +182,5 @@ public class Price {
 			return false;
 		return true;
 	}
-	
-	
+
 }

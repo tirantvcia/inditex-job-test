@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,11 +20,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inditex.test.springboot.app.TestData;
 import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PriceListControllerRestTemplateTest {
@@ -35,8 +30,8 @@ public class PriceListControllerRestTemplateTest {
 	private TestRestTemplate client;
 
 	ObjectMapper objectMapper;
-	
-    @LocalServerPort
+
+	@LocalServerPort
 	private String puerto;
 
 	@BeforeEach
@@ -64,18 +59,18 @@ public class PriceListControllerRestTemplateTest {
 		assertNotNull(productRate);
 
 		assertNotNull(response.getBody());
-		
+
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 
 		assertTrue(TestData.PRODUCT_RATE_1.equals(productRate));
 
 	}
+
 	@Test
 	@DisplayName("petición a las 16:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at16Oclock() {
 
-		
 		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
 
 		String date = "14, 06, 2020";
@@ -91,20 +86,20 @@ public class PriceListControllerRestTemplateTest {
 		ProductRate productRate = response.getBody();
 		assertNotNull(productRate);
 		assertNotNull(response.getBody());
-		
+
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 
-		assertTrue(TestData.PRODUCT_RATE_2.equals(productRate));		
-	}	
+		assertTrue(TestData.PRODUCT_RATE_2.equals(productRate));
+	}
 
 	private String getUri(String uri) {
 		return "http://localhost:" + puerto + uri;
 	}
 
 	private ResponseEntity<ProductRate> involeUriExchange(UriComponentsBuilder builder, HttpEntity requestEntity) {
-		 ResponseEntity<ProductRate> response = client.exchange(builder.build().encode().toUri(), HttpMethod.GET, requestEntity,
-				 ProductRate.class);
+		ResponseEntity<ProductRate> response = client.exchange(builder.build().encode().toUri(), HttpMethod.GET,
+				requestEntity, ProductRate.class);
 		return response;
 	}
 

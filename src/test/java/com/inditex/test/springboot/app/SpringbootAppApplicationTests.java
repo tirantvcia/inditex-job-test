@@ -26,18 +26,17 @@ class SpringbootAppApplicationTests {
 
 	@MockBean
 	PricesRepository pricesRepository;
-	
+
 	@Autowired
 	ZaraProductRateService zaraProductRate;
 
-	
 	@Test
 	@DisplayName("No rate selected when entry is null")
 	void emptyProductRateForNullSelection() {
 		RateSelection entry = null;
 		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		assertNotNull(rate);
-		
+
 		assertEquals(null, rate.getProductId());
 		assertEquals(null, rate.getPriceList());
 		assertEquals(null, rate.getBrand());
@@ -46,19 +45,19 @@ class SpringbootAppApplicationTests {
 		assertEquals(null, rate.getPrice());
 
 	}
-	
+
 	@Test
 	@DisplayName("Return empty rate when priceList is not selected")
 	void emptyProductRateForNoPriceSelection() {
-		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14),
-				LocalTime.of(10,00), 34455L, 1L);
-		
-		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand())).thenReturn(null);
-		
+		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14), LocalTime.of(10, 00), 34455L, 1L);
+
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
+				entry.getBrand())).thenReturn(null);
+
 		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
-		
+
 		assertNotNull(rate);
-		
+
 		assertEquals(null, rate.getProductId());
 		assertEquals(null, rate.getPriceList());
 		assertEquals(null, rate.getBrand());
@@ -67,19 +66,17 @@ class SpringbootAppApplicationTests {
 		assertEquals(null, rate.getPrice());
 
 	}
-	
+
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14),
-				LocalTime.of(10,00), 34455L, 1L);
-		
-		
-		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand()))
-		.thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
-		
+		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 34455L, 1L);
+
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
+				entry.getBrand())).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
+
 		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
-		
+
 		assertEquals(35455L, rate.getProductId());
 		assertEquals(1, rate.getPriceList());
 		assertEquals(1, rate.getBrand().getId());
@@ -87,12 +84,9 @@ class SpringbootAppApplicationTests {
 		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), rate.getEndDate());
 		assertEquals(35.50, rate.getPrice());
 	}
-	
-	private Date convertToDate(LocalDateTime dateToConvert) {
-	    return java.util.Date
-	      .from(dateToConvert.atZone(ZoneId.systemDefault())
-	      .toInstant());
-	}
 
+	private Date convertToDate(LocalDateTime dateToConvert) {
+		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+	}
 
 }
