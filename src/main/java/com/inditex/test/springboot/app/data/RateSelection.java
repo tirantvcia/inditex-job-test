@@ -21,13 +21,29 @@ public class RateSelection implements Serializable{
 
 	private RateSelection() {
 	}
-
-	private RateSelection(LocalDate date, LocalTime time, Long product, Long brand) {
-		this.date = convertToDate(LocalDateTime.of(date, time));
+	
+	private RateSelection(Date date, Long product, Long brand) {
+		this.date = date;
 		this.product = product;
 		this.brand = brand;
 	}
 
+	public static RateSelection create(String date, String time, Long productId, Long brandId) {
+		try {
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+			LocalDate petitionDate = LocalDate.parse(date, dateFormatter);
+			LocalTime petitionTime = LocalTime.parse(time, timeFormatter);
+			return new RateSelection(convertToDate(LocalDateTime.of(petitionDate, petitionTime)), productId, brandId);
+		} catch (Exception ex) {
+			return new RateSelection();
+		}
+	}
+	
+	private static Date convertToDate(LocalDateTime dateToConvert) {
+		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -40,20 +56,8 @@ public class RateSelection implements Serializable{
 		return brand;
 	}
 
-	private Date convertToDate(LocalDateTime dateToConvert) {
-		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
-	}
 
-	public static RateSelection create(String date, String time, Long productId, Long brandId) {
-		try {
-			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-			LocalDate petitionDate = LocalDate.parse(date, dateFormatter);
-			LocalTime petitionTime = LocalTime.parse(time, timeFormatter);
-			return new RateSelection(petitionDate, petitionTime, productId, brandId);
-		} catch (Exception ex) {
-			return new RateSelection();
-		}
-	}
+
+
 
 }
