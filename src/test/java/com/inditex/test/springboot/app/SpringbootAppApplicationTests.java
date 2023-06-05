@@ -1,7 +1,6 @@
 package com.inditex.test.springboot.app;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -21,6 +20,9 @@ import com.inditex.test.springboot.app.services.ZaraProductRateService;
 
 @SpringBootTest
 class SpringbootAppApplicationTests {
+
+	private static final long BRAND_ID_1 = 1L;
+	private static final long PRODUCT_ID_34455 = 34455L;
 
 	@MockBean
 	PricesRepository pricesRepository;
@@ -47,7 +49,9 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("Return empty rate when priceList is not selected")
 	void emptyProductRateForNoPriceSelection() {
-		RateSelection entry = RateSelection.create("14-03-2022", "10:00", 34455L, 1L);
+		String date = "14-03-2022";
+		String time = "10:00";
+		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_34455, BRAND_ID_1);
 
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(null);
@@ -66,21 +70,20 @@ class SpringbootAppApplicationTests {
 	}
 
 	@Test
-	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
+	@DisplayName("petición a las 10:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
-		RateSelection entry = RateSelection.create("14-06-2020", "10:00", 34455L, 1L);
-
+		String date = "14-06-2020";
+		String time = "10:00";
+		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_34455, 1L);
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
-
 		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
-
-		assertEquals(35455L, rate.getProductId());
-		assertEquals(1, rate.getPriceList());
-		assertEquals(1, rate.getBrandId());
-		assertEquals(convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), rate.getStartDate());
-		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), rate.getEndDate());
-		assertEquals(35.50, rate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), rate.getProductId());
+		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), rate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_1.getBrandId(), rate.getBrandId());
+		assertTrue(TestData.PRODUCT_RATE_1.getStartDate().equals(rate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_1.getEndDate().equals(rate.getEndDate()));
+		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), rate.getPrice());
 	}
 
 	private Date convertToDate(LocalDateTime dateToConvert) {
