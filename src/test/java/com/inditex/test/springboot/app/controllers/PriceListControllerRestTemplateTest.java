@@ -3,7 +3,6 @@ package com.inditex.test.springboot.app.controllers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inditex.test.springboot.app.TestData;
 import com.inditex.test.springboot.app.data.ProductRate;
 
@@ -28,15 +26,10 @@ public class PriceListControllerRestTemplateTest {
 	@Autowired
 	private TestRestTemplate client;
 
-	ObjectMapper objectMapper;
 
 	@LocalServerPort
 	private String puerto;
 
-	@BeforeEach
-	public void setup() {
-		objectMapper = new ObjectMapper();
-	}
 
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
@@ -100,6 +93,38 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_2.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_2.getPriceList(), productRate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_2.getProductId(), productRate.getProductId());
+	}
+	
+	@Test
+	@DisplayName("petición a las 21:00 del día 14 del producto 35455 para la brand 1")
+	void checkProductRatesForDate14at21Oclock() {
+		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
+
+		String date = "14-06-2020";
+		String time = "21:00";
+		Long productId = 35455L;
+		Long brandId = 1L;
+		UriComponentsBuilder builder = initComponentBuilder(url, date, time, productId, brandId);
+
+		HttpEntity requestEntity = getHeaders();
+
+		ResponseEntity<ProductRate> response = involeUriExchange(builder, requestEntity);
+
+		ProductRate productRate = response.getBody();
+		assertNotNull(productRate);
+
+		assertNotNull(response.getBody());
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
+
+		assertNotNull(productRate);
+		
+
+		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), productRate.getProductId());
+		
 	}
 
 	private String getUri(String uri) {
