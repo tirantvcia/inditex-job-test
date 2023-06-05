@@ -2,6 +2,7 @@ package com.inditex.test.springboot.app.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.inditex.test.springboot.app.TestData;
 import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PriceListControllerRestTemplateTest {
@@ -48,6 +48,8 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), productRate.getProductId());
+		assertTrue(TestData.PRODUCT_RATE_1.getStartDate().equals(productRate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_1.getEndDate().equals(productRate.getEndDate()));
 	}
 
 	@Test
@@ -66,6 +68,8 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_2.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_2.getPriceList(), productRate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_2.getProductId(), productRate.getProductId());
+		assertTrue(TestData.PRODUCT_RATE_2.getStartDate().equals(productRate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_2.getEndDate().equals(productRate.getEndDate()));
 	}
 	
 	@Test
@@ -84,6 +88,8 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), productRate.getProductId());
+		assertTrue(TestData.PRODUCT_RATE_1.getStartDate().equals(productRate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_1.getEndDate().equals(productRate.getEndDate()));
 	}
 
 	@Test
@@ -100,7 +106,9 @@ public class PriceListControllerRestTemplateTest {
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_3.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_3.getPriceList(), productRate.getPriceList());
-		assertEquals(TestData.PRODUCT_RATE_3.getProductId(), productRate.getProductId());		
+		assertEquals(TestData.PRODUCT_RATE_3.getProductId(), productRate.getProductId());
+		assertTrue(TestData.PRODUCT_RATE_3.getStartDate().equals(productRate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_3.getEndDate().equals(productRate.getEndDate()));
 	}
 	
 	@Test
@@ -117,7 +125,9 @@ public class PriceListControllerRestTemplateTest {
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_4.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_4.getPriceList(), productRate.getPriceList());
-		assertEquals(TestData.PRODUCT_RATE_4.getProductId(), productRate.getProductId());		
+		assertEquals(TestData.PRODUCT_RATE_4.getProductId(), productRate.getProductId());
+		assertTrue(TestData.PRODUCT_RATE_4.getStartDate().equals(productRate.getStartDate()));
+		assertTrue(TestData.PRODUCT_RATE_4.getEndDate().equals(productRate.getEndDate()));
 
 	}	
 	
