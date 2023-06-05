@@ -2,7 +2,6 @@ package com.inditex.test.springboot.app.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -78,7 +77,7 @@ public class PriceListControllerRestTemplateTest {
 
 		String url = getUri("/test/prices/getMostPriorityPriceBySelection");
 
-		String date = "14, 06, 2020";
+		String date = "14-06-2020";
 		String time = "16:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
