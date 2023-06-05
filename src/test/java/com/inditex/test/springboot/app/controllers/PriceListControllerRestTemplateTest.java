@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.inditex.test.springboot.app.TestData;
 import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.data.RateSelection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PriceListControllerRestTemplateTest {
@@ -85,6 +86,22 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), productRate.getProductId());
 	}
 
+	@Test
+	@DisplayName("petición a las 10:00 del día 15 del producto 35455 para la brand 1")
+	void checkProductRatesForDate15at10Oclock() {
+		String date = "15-06-2020";
+		String time = "10:00";
+		Long productId = 35455L;
+		Long brandId = 1L;
+		ResponseEntity<ProductRate> response =  invokeUriExchange(date, time, productId, brandId);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
+		ProductRate productRate = response.getBody();
+		assertNotNull(productRate);
+		assertEquals(TestData.PRODUCT_RATE_3.getPrice(), productRate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_3.getPriceList(), productRate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_3.getProductId(), productRate.getProductId());		
+	}
 	private ResponseEntity<ProductRate> invokeUriExchange(String date, String time, Long productId, Long brandId) {
 		String url = getUri(GET_MOST_PRIORITY_PRICE_BY_SELECTION);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).queryParam("date", date)
