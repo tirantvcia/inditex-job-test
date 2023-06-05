@@ -23,10 +23,7 @@ public class FacadeImpl implements Facade {
 	public ProductRate findMostPriorityPriceBySelection(String date, String time, Long productId, Long brandId) {
 
 		RateSelection entry = RateSelection.create(date, time, productId, brandId);
-		 ProductRate findMostPriorityPriceBySelection = service.findMostPriorityPriceBySelection(entry);
-		 return findMostPriorityPriceBySelection;
-
-
+		return service.findMostPriorityPriceBySelection(entry);
 	}
 
 
