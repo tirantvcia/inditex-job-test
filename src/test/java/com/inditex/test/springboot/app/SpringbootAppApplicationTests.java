@@ -37,7 +37,7 @@ class SpringbootAppApplicationTests {
 
 		assertEquals(null, rate.getProductId());
 		assertEquals(null, rate.getPriceList());
-		assertEquals(null, rate.getBrand());
+		assertEquals(null, rate.getBrandId());
 		assertEquals(null, rate.getStartDate());
 		assertEquals(null, rate.getEndDate());
 		assertEquals(null, rate.getPrice());
@@ -58,7 +58,7 @@ class SpringbootAppApplicationTests {
 
 		assertEquals(null, rate.getProductId());
 		assertEquals(null, rate.getPriceList());
-		assertEquals(null, rate.getBrand());
+		assertEquals(null, rate.getBrandId());
 		assertEquals(null, rate.getStartDate());
 		assertEquals(null, rate.getEndDate());
 		assertEquals(null, rate.getPrice());
@@ -77,7 +77,7 @@ class SpringbootAppApplicationTests {
 
 		assertEquals(35455L, rate.getProductId());
 		assertEquals(1, rate.getPriceList());
-		assertEquals(1, rate.getBrand().getId());
+		assertEquals(1, rate.getBrandId());
 		assertEquals(convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)), rate.getStartDate());
 		assertEquals(convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), rate.getEndDate());
 		assertEquals(35.50, rate.getPrice());

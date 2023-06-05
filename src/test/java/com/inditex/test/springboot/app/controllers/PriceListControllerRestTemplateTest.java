@@ -63,7 +63,12 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 
-		assertTrue(TestData.PRODUCT_RATE_1.equals(productRate));
+		assertNotNull(productRate);
+		
+
+		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), productRate.getProductId());
 
 	}
 
@@ -90,7 +95,12 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
 
-		assertTrue(TestData.PRODUCT_RATE_2.equals(productRate));
+		assertNotNull(productRate);
+		
+
+		assertEquals(TestData.PRODUCT_RATE_2.getPrice(), productRate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_2.getPriceList(), productRate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_2.getProductId(), productRate.getProductId());
 	}
 
 	private String getUri(String uri) {

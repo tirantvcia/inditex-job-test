@@ -1,5 +1,6 @@
 package com.inditex.test.springboot.app.data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,8 +8,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class RateSelection {
 
+public class RateSelection implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 546828601249254905L;
 	private Date date;
 	private Long product;
 	private Long brand;

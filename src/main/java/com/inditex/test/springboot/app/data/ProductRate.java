@@ -1,15 +1,19 @@
 package com.inditex.test.springboot.app.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
 
-public class ProductRate {
+public class ProductRate implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9058136822528153180L;
 	private Long productId;
 	private Long priceList;
-	private Brand brand;
+	private Long brandId;
 	private Date startDate;
 	private Date endDate;
 	private Double price;
@@ -17,11 +21,11 @@ public class ProductRate {
 	public ProductRate() {
 	}
 
-	private ProductRate(Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,
+	private ProductRate(Long productId, Long priceList, Long brandId, Date startDateTime, Date endDateTime,
 			Double price) {
 		this.productId = productId;
 		this.priceList = priceList;
-		this.brand = brand;
+		this.brandId = brandId;
 		this.startDate = startDateTime;
 		this.endDate = endDateTime;
 		this.price = price;
@@ -29,7 +33,7 @@ public class ProductRate {
 
 	public static ProductRate create(Price p) {
 		if (p != null) {
-			return new ProductRate(p.getProductId(), p.getId(), p.getBrand(), p.getStartDate(), p.getEndDate(),
+			return new ProductRate(p.getProductId(), p.getId(), p.getBrand().getId(), p.getStartDate(), p.getEndDate(),
 					p.getPrice());
 
 		}
@@ -81,8 +85,8 @@ public class ProductRate {
 		return priceList;
 	}
 
-	public Brand getBrand() {
-		return brand;
+	public Long getBrandId() {
+		return brandId;
 	}
 
 	public Date getStartDate() {
