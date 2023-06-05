@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class RateSelection {
@@ -12,10 +13,10 @@ public class RateSelection {
 	private Long product;
 	private Long brand;
 
-	public RateSelection() {
+	private RateSelection() {
 	}
 
-	public RateSelection(LocalDate date, LocalTime time, Long product, Long brand) {
+	private RateSelection(LocalDate date, LocalTime time, Long product, Long brand) {
 		this.date = convertToDate(LocalDateTime.of(date, time));
 		this.product = product;
 		this.brand = brand;
@@ -35,6 +36,18 @@ public class RateSelection {
 
 	private Date convertToDate(LocalDateTime dateToConvert) {
 		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	public static RateSelection create(String date, String time, Long productId, Long brandId) {
+		try {
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+			LocalDate petitionDate = LocalDate.parse(date, dateFormatter);
+			LocalTime petitionTime = LocalTime.parse(time, timeFormatter);
+			return new RateSelection(petitionDate, petitionTime, productId, brandId);
+		} catch (Exception ex) {
+			return new RateSelection();
+		}
 	}
 
 }

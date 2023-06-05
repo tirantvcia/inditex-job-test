@@ -1,10 +1,7 @@
 package com.inditex.test.springboot.app.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +27,8 @@ public class Facade {
 
 	public ProductRate findMostPriorityPriceBySelection(String date, String time, Long productId, Long brandId) {
 
-		LocalDateTime dateTime = toLocalDateTime(date, time);
-		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14), LocalTime.of(10, 00), 34455L, 1L);
+
+		RateSelection entry = RateSelection.create(date, time, productId, brandId);
 		Brand Brand_ZARA = new Brand(1L, "ZARA");
 		Price PRICE_LIST_1 = new Price(1L, Brand_ZARA, convertToDate(LocalDateTime.of(2020, 6, 14, 0, 0, 0)),
 				convertToDate(LocalDateTime.of(2020, 12, 31, 23, 59, 59)), 35455L, 0, 35.5, "EUR");
@@ -40,13 +37,6 @@ public class Facade {
 
 	}
 
-	public LocalDateTime toLocalDateTime(String date, String time) {
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-		LocalDate petitionDate = LocalDate.parse(date, dateFormatter);
-		LocalTime petitionTime = LocalTime.parse(time, timeFormatter);
-		return LocalDateTime.of(petitionDate, petitionTime);
-	}
 
 	private Date convertToDate(LocalDateTime dateToConvert) {
 		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());

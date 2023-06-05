@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -49,7 +47,7 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("Return empty rate when priceList is not selected")
 	void emptyProductRateForNoPriceSelection() {
-		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14), LocalTime.of(10, 00), 34455L, 1L);
+		RateSelection entry = RateSelection.create("14-03-2022", "10:00", 34455L, 1L);
 
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(null);
@@ -70,7 +68,7 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 34455L, 1L);
+		RateSelection entry = RateSelection.create("14-06-2020", "10:00", 34455L, 1L);
 
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);

@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +27,7 @@ public class SpringBootJpaTest {
 	@DisplayName("Return empty rate when priceList is not selected")
 	void emptyProductRateForNoPriceSelection() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2022, 3, 14), LocalTime.of(10, 00), 34455L, 1L);
+		RateSelection entry = RateSelection.create("14-03-2022", "10:00", 34455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -51,7 +49,7 @@ public class SpringBootJpaTest {
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("14-06-2020", "10:00", 35455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -70,7 +68,7 @@ public class SpringBootJpaTest {
 	@DisplayName("petición a las 16:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at16Oclock() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(16, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("14-06-2020", "16:00", 35455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -87,7 +85,7 @@ public class SpringBootJpaTest {
 	@DisplayName("petición a las 21:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at21Oclock() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(21, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("14-06-2020", "21:00", 35455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -104,7 +102,7 @@ public class SpringBootJpaTest {
 	@DisplayName("petición a las 10:00 del día 15 del producto 35455 para la brand 1")
 	void checkProductRatesForDate15at10Oclock() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 15), LocalTime.of(10, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("15-06-2020", "10:00", 35455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -121,7 +119,7 @@ public class SpringBootJpaTest {
 	@DisplayName("petición a las 21:00 del día 16 del producto 35455 para la brand 1")
 	void checkProductRatesForDate16at21Oclock() {
 
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 16), LocalTime.of(21, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("16-06-2020", "21:00", 35455L, 1L);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());

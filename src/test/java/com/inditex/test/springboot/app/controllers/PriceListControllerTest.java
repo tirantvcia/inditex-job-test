@@ -43,7 +43,7 @@ class PriceListControllerTest {
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455   para la brand 1")
 	void getMostPriorityPriceBySelection() throws Exception {
-		RateSelection entry = new RateSelection(LocalDate.of(2020, 6, 14), LocalTime.of(10, 00), 35455L, 1L);
+		RateSelection entry = RateSelection.create("14-06-2020", "10:00", 35455L, 1L);
 
 		when(service.findMostPriorityPriceBySelection(entry)).thenReturn(TestData.PRODUCT_RATE_1);
 
