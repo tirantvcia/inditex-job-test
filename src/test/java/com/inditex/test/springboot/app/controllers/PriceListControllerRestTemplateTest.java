@@ -102,6 +102,25 @@ public class PriceListControllerRestTemplateTest {
 		assertEquals(TestData.PRODUCT_RATE_3.getPriceList(), productRate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_3.getProductId(), productRate.getProductId());		
 	}
+	
+	@Test
+	@DisplayName("petición a las 21:00 del día 16 del producto 35455 para la brand 1")
+	void checkProductRatesForDate16at21Oclock() {
+		String date = "16-06-2020";
+		String time = "21:00";
+		Long productId = 35455L;
+		Long brandId = 1L;
+		ResponseEntity<ProductRate> response =  invokeUriExchange(date, time, productId, brandId);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
+		ProductRate productRate = response.getBody();
+		assertNotNull(productRate);
+		assertEquals(TestData.PRODUCT_RATE_4.getPrice(), productRate.getPrice());
+		assertEquals(TestData.PRODUCT_RATE_4.getPriceList(), productRate.getPriceList());
+		assertEquals(TestData.PRODUCT_RATE_4.getProductId(), productRate.getProductId());		
+
+	}	
+	
 	private ResponseEntity<ProductRate> invokeUriExchange(String date, String time, Long productId, Long brandId) {
 		String url = getUri(GET_MOST_PRIORITY_PRICE_BY_SELECTION);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).queryParam("date", date)
