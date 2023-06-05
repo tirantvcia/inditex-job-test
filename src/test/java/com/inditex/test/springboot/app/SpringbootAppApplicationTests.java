@@ -1,11 +1,9 @@
 package com.inditex.test.springboot.app;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -84,10 +82,6 @@ class SpringbootAppApplicationTests {
 		assertTrue(TestData.PRODUCT_RATE_1.getStartDate().equals(rate.getStartDate()));
 		assertTrue(TestData.PRODUCT_RATE_1.getEndDate().equals(rate.getEndDate()));
 		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), rate.getPrice());
-	}
-
-	private Date convertToDate(LocalDateTime dateToConvert) {
-		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
 	}
 
 }
