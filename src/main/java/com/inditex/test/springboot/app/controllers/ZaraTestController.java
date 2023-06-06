@@ -14,15 +14,15 @@ import com.inditex.test.springboot.app.services.Facade;
 
 @RestController
 @RequestMapping("/test/prices")
-public class PriceListController {
+public class ZaraTestController {
 
 	private Facade facade;
 
-	public PriceListController() {
+	public ZaraTestController() {
 	}
 
 	@Autowired
-	public PriceListController(Facade facade) {
+	public ZaraTestController(Facade facade) {
 		this.facade = facade;
 	}
 

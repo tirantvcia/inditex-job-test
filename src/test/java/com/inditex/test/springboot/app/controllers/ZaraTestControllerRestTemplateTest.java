@@ -23,7 +23,7 @@ import com.inditex.test.springboot.app.TestData;
 import com.inditex.test.springboot.app.data.ProductRate;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class PriceListControllerRestTemplateTest {
+public class ZaraTestControllerRestTemplateTest {
 	private static final String GET_MOST_PRIORITY_PRICE_BY_SELECTION = "/test/prices/getMostPriorityPriceBySelection";
 
 	@Autowired
