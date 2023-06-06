@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Selector Precios", description = "Price rate to apply according date, product and brands")
-public interface ZaraTestControllerSwagger {
+public interface InditexJobTestControllerSwagger {
 
 	@Operation(summary = "find most priority price rate to apply according ")
 	@ApiResponses(value = {

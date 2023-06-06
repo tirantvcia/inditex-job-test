@@ -14,15 +14,15 @@ import com.inditex.test.springboot.app.services.Facade;
 
 @RestController
 @RequestMapping("/test/prices")
-public class ZaraTestController implements ZaraTestControllerSwagger{
+public class InditexJobTestController implements InditexJobTestControllerSwagger{
 
 	private Facade facade;
 
-	public ZaraTestController() {
+	public InditexJobTestController() {
 	}
 
 	@Autowired
-	public ZaraTestController(Facade facade) {
+	public InditexJobTestController(Facade facade) {
 		this.facade = facade;
 	}
 
