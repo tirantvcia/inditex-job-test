@@ -14,7 +14,7 @@ import com.inditex.test.springboot.app.services.Facade;
 
 @RestController
 @RequestMapping("/test/prices")
-public class ZaraTestController {
+public class ZaraTestController implements ZaraTestControllerSwagger{
 
 	private Facade facade;
 
@@ -26,6 +26,7 @@ public class ZaraTestController {
 		this.facade = facade;
 	}
 
+	@Override
 	@GetMapping("/getMostPriorityPriceBySelection")
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<ProductRateResponse> findMostPriorityPriceBySelection(@RequestParam("date") String date,
