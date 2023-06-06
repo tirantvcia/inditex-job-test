@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inditex.test.springboot.app.TestData;
-import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
+import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 @ExtendWith(MockitoExtension.class)
 class FacadeTest {
@@ -35,10 +35,10 @@ class FacadeTest {
 		Long brandId = 1L;
 		
 		
-		when(service.findMostPriorityPriceBySelection(any(RateSelection.class))).thenReturn(TestData.PRODUCT_RATE_1);
+		when(service.findMostPriorityPriceBySelection(any(RateSelectionRequest.class))).thenReturn(TestData.PRODUCT_RATE_1);
 			
 
-		ProductRate productRate = facade.findMostPriorityPriceBySelection(date, time, productId, brandId);
+		ProductRateResponse productRate = facade.findMostPriorityPriceBySelection(date, time, productId, brandId);
 		assertNotNull(productRate);
 		
 
@@ -52,9 +52,9 @@ class FacadeTest {
 	void checkProductRatesForDate14at21Oclock() {
 
 
-		when(service.findMostPriorityPriceBySelection(any(RateSelection.class))).thenReturn(TestData.PRODUCT_RATE_2);
+		when(service.findMostPriorityPriceBySelection(any(RateSelectionRequest.class))).thenReturn(TestData.PRODUCT_RATE_2);
 
-		ProductRate productRate = facade.findMostPriorityPriceBySelection("14-06-2020", "21:00", 35455L, 1L);
+		ProductRateResponse productRate = facade.findMostPriorityPriceBySelection("14-06-2020", "21:00", 35455L, 1L);
 		
 		assertEquals(TestData.PRODUCT_RATE_2.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_2.getPriceList(), productRate.getPriceList());

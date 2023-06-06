@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 import com.inditex.test.springboot.app.models.Brand;
 import com.inditex.test.springboot.app.models.Price;
 
@@ -33,10 +33,10 @@ public class TestData {
 			.collect(Collectors.toList());
 
 //	Long productId, Long priceList, Brand brand, Date startDateTime, Date endDateTime,Double price
-	public static final ProductRate PRODUCT_RATE_1 = ProductRate.create(PRICE_LIST_1);
-	public static final ProductRate PRODUCT_RATE_2 = ProductRate.create(PRICE_LIST_2);
-	public static final ProductRate PRODUCT_RATE_3 = ProductRate.create(PRICE_LIST_3);
-	public static final ProductRate PRODUCT_RATE_4 = ProductRate.create(PRICE_LIST_4);
+	public static final ProductRateResponse PRODUCT_RATE_1 = ProductRateResponse.create(PRICE_LIST_1);
+	public static final ProductRateResponse PRODUCT_RATE_2 = ProductRateResponse.create(PRICE_LIST_2);
+	public static final ProductRateResponse PRODUCT_RATE_3 = ProductRateResponse.create(PRICE_LIST_3);
+	public static final ProductRateResponse PRODUCT_RATE_4 = ProductRateResponse.create(PRICE_LIST_4);
 
 	private static Date convertToDate(LocalDateTime dateToConvert) {
 		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());

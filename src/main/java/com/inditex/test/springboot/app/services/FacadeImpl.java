@@ -3,8 +3,8 @@ package com.inditex.test.springboot.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
+import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 @Component
 public class FacadeImpl implements Facade {
@@ -20,9 +20,9 @@ public class FacadeImpl implements Facade {
 	}
 
 	@Override
-	public ProductRate findMostPriorityPriceBySelection(String date, String time, Long productId, Long brandId) {
+	public ProductRateResponse findMostPriorityPriceBySelection(String date, String time, Long productId, Long brandId) {
 
-		RateSelection entry = RateSelection.create(date, time, productId, brandId);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, productId, brandId);
 		return service.findMostPriorityPriceBySelection(entry);
 	}
 

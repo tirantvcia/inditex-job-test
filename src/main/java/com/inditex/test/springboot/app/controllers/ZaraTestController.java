@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 import com.inditex.test.springboot.app.services.Facade;
 
 @RestController
@@ -28,11 +28,11 @@ public class ZaraTestController {
 
 	@GetMapping("/getMostPriorityPriceBySelection")
 	@ResponseStatus(value = HttpStatus.OK)
-	public ResponseEntity<?> findMostPriorityPriceBySelection(@RequestParam("date") String date,
+	public ResponseEntity<ProductRateResponse> findMostPriorityPriceBySelection(@RequestParam("date") String date,
 			@RequestParam("time") String time, @RequestParam("productId") Long productId,
 			@RequestParam("brandId") Long brandId) {
 
-		ProductRate mostPriorityPriceBySelection = facade.findMostPriorityPriceBySelection(date, time, productId,
+		ProductRateResponse mostPriorityPriceBySelection = facade.findMostPriorityPriceBySelection(date, time, productId,
 				brandId);
 
 		return ResponseEntity.ok(mostPriorityPriceBySelection);

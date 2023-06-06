@@ -1,11 +1,11 @@
-package com.inditex.test.springboot.app.data;
+package com.inditex.test.springboot.app.dto.response;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import com.inditex.test.springboot.app.models.Price;
 
-public class ProductRate implements Serializable{
+public class ProductRateResponse implements Serializable{
 
 	/**
 	 * 
@@ -18,10 +18,10 @@ public class ProductRate implements Serializable{
 	private Date endDate;
 	private Double price;
 
-	public ProductRate() {
+	public ProductRateResponse() {
 	}
 
-	private ProductRate(Long productId, Long priceList, Long brandId, Date startDateTime, Date endDateTime,
+	private ProductRateResponse(Long productId, Long priceList, Long brandId, Date startDateTime, Date endDateTime,
 			Double price) {
 		this.productId = productId;
 		this.priceList = priceList;
@@ -31,13 +31,13 @@ public class ProductRate implements Serializable{
 		this.price = price;
 	}
 
-	public static ProductRate create(Price p) {
+	public static ProductRateResponse create(Price p) {
 		if (p != null) {
-			return new ProductRate(p.getProductId(), p.getId(), p.getBrand().getId(), p.getStartDate(), p.getEndDate(),
+			return new ProductRateResponse(p.getProductId(), p.getId(), p.getBrand().getId(), p.getStartDate(), p.getEndDate(),
 					p.getPrice());
 
 		}
-		return new ProductRate();
+		return new ProductRateResponse();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class ProductRate implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductRate other = (ProductRate) obj;
+		ProductRateResponse other = (ProductRateResponse) obj;
 		if (price == null) {
 			if (other.price != null)
 				return false;

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
+import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 import com.inditex.test.springboot.app.repositories.PricesRepository;
 import com.inditex.test.springboot.app.services.ZaraProductRateService;
 
@@ -31,8 +31,8 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("No rate selected when entry is null")
 	void emptyProductRateForNullSelection() {
-		RateSelection entry = null;
-		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
+		RateSelectionRequest entry = null;
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		assertNotNull(rate);
 
 		assertEquals(null, rate.getProductId());
@@ -49,12 +49,12 @@ class SpringbootAppApplicationTests {
 	void emptyProductRateForNoPriceSelection() {
 		String date = "14-03-2022";
 		String time = "10:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_34455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_34455, BRAND_ID_1);
 
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(null);
 
-		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 
 		assertNotNull(rate);
 
@@ -72,10 +72,10 @@ class SpringbootAppApplicationTests {
 	void checkProductRatesForDate14at10Oclock() {
 		String date = "14-06-2020";
 		String time = "10:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_34455, 1L);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_34455, 1L);
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
 				entry.getBrand())).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
-		ProductRate rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
 		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), rate.getProductId());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), rate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_1.getBrandId(), rate.getBrandId());

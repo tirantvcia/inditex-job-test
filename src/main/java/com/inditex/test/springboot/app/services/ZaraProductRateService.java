@@ -1,10 +1,10 @@
 package com.inditex.test.springboot.app.services;
 
-import com.inditex.test.springboot.app.data.ProductRate;
-import com.inditex.test.springboot.app.data.RateSelection;
+import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 public interface ZaraProductRateService {
 
-	ProductRate findMostPriorityPriceBySelection(RateSelection entry);
+	ProductRateResponse findMostPriorityPriceBySelection(RateSelectionRequest entry);
 
 }

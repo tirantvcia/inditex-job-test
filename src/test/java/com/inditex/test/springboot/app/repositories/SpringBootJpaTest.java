@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.inditex.test.springboot.app.TestData;
-import com.inditex.test.springboot.app.data.RateSelection;
+import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
 import com.inditex.test.springboot.app.models.Price;
 
 @DataJpaTest
@@ -30,7 +30,7 @@ public class SpringBootJpaTest {
 
 		String date = "14-03-2022";
 		String time = "10:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
 
@@ -53,7 +53,7 @@ public class SpringBootJpaTest {
 
 		String date = "14-06-2020";
 		String time = "10:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -74,7 +74,7 @@ public class SpringBootJpaTest {
 
 		String date = "14-06-2020";
 		String time = "16:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -96,7 +96,7 @@ public class SpringBootJpaTest {
 
 		String date = "14-06-2020";
 		String time = "21:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -116,7 +116,7 @@ public class SpringBootJpaTest {
 
 		String date = "15-06-2020";
 		String time = "10:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());
@@ -136,7 +136,7 @@ public class SpringBootJpaTest {
 
 		String date = "16-06-2020";
 		String time = "21:00";
-		RateSelection entry = RateSelection.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
+		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_35455, BRAND_ID_1);
 
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(), entry.getBrand());

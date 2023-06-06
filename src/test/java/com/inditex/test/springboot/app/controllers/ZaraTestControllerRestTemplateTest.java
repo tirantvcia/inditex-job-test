@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.inditex.test.springboot.app.TestData;
-import com.inditex.test.springboot.app.data.ProductRate;
+import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ZaraTestControllerRestTemplateTest {
@@ -40,10 +40,10 @@ public class ZaraTestControllerRestTemplateTest {
 		String time = "10:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		ResponseEntity<ProductRate> response = invokeUriExchange(date, time, productId, brandId);
+		ResponseEntity<ProductRateResponse> response = invokeUriExchange(date, time, productId, brandId);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
-		ProductRate productRate = response.getBody();
+		ProductRateResponse productRate = response.getBody();
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
@@ -60,10 +60,10 @@ public class ZaraTestControllerRestTemplateTest {
 		String time = "16:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		ResponseEntity<ProductRate> response = invokeUriExchange(date, time, productId, brandId);
+		ResponseEntity<ProductRateResponse> response = invokeUriExchange(date, time, productId, brandId);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
-		ProductRate productRate = response.getBody();
+		ProductRateResponse productRate = response.getBody();
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_2.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_2.getPriceList(), productRate.getPriceList());
@@ -80,10 +80,10 @@ public class ZaraTestControllerRestTemplateTest {
 		String time = "21:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		ResponseEntity<ProductRate> response =  invokeUriExchange(date, time, productId, brandId);
+		ResponseEntity<ProductRateResponse> response =  invokeUriExchange(date, time, productId, brandId);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
-		ProductRate productRate = response.getBody();
+		ProductRateResponse productRate = response.getBody();
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), productRate.getPriceList());
@@ -99,10 +99,10 @@ public class ZaraTestControllerRestTemplateTest {
 		String time = "10:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		ResponseEntity<ProductRate> response =  invokeUriExchange(date, time, productId, brandId);
+		ResponseEntity<ProductRateResponse> response =  invokeUriExchange(date, time, productId, brandId);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
-		ProductRate productRate = response.getBody();
+		ProductRateResponse productRate = response.getBody();
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_3.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_3.getPriceList(), productRate.getPriceList());
@@ -118,10 +118,10 @@ public class ZaraTestControllerRestTemplateTest {
 		String time = "21:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		ResponseEntity<ProductRate> response =  invokeUriExchange(date, time, productId, brandId);
+		ResponseEntity<ProductRateResponse> response =  invokeUriExchange(date, time, productId, brandId);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType());
-		ProductRate productRate = response.getBody();
+		ProductRateResponse productRate = response.getBody();
 		assertNotNull(productRate);
 		assertEquals(TestData.PRODUCT_RATE_4.getPrice(), productRate.getPrice());
 		assertEquals(TestData.PRODUCT_RATE_4.getPriceList(), productRate.getPriceList());
@@ -131,13 +131,13 @@ public class ZaraTestControllerRestTemplateTest {
 
 	}	
 	
-	private ResponseEntity<ProductRate> invokeUriExchange(String date, String time, Long productId, Long brandId) {
+	private ResponseEntity<ProductRateResponse> invokeUriExchange(String date, String time, Long productId, Long brandId) {
 		String url = getUri(GET_MOST_PRIORITY_PRICE_BY_SELECTION);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).queryParam("date", date)
 				.queryParam("time", time).queryParam("productId", productId).queryParam("brandId", brandId);
 		HttpEntity requestEntity = getHeaders();
 		return client.exchange(builder.build().encode().toUri(), HttpMethod.GET,
-				requestEntity, ProductRate.class);
+				requestEntity, ProductRateResponse.class);
 	}
 	
 	private String getUri(String uri) {
