@@ -2,6 +2,8 @@ package com.inditex.test.springboot.app.dto.response;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.inditex.test.springboot.app.models.Price;
 

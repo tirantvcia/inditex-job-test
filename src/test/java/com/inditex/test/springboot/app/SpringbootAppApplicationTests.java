@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
 import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 import com.inditex.test.springboot.app.repositories.PricesRepository;
 import com.inditex.test.springboot.app.services.ZaraProductRateService;
@@ -19,8 +18,7 @@ import com.inditex.test.springboot.app.services.ZaraProductRateService;
 @SpringBootTest
 class SpringbootAppApplicationTests {
 
-	private static final long BRAND_ID_1 = 1L;
-	private static final long PRODUCT_ID_34455 = 34455L;
+
 
 	@MockBean
 	PricesRepository pricesRepository;
@@ -29,32 +27,14 @@ class SpringbootAppApplicationTests {
 	ZaraProductRateService zaraProductRate;
 
 	@Test
-	@DisplayName("No rate selected when entry is null")
-	void emptyProductRateForNullSelection() {
-		RateSelectionRequest entry = null;
-		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
-		assertNotNull(rate);
-
-		assertEquals(null, rate.getProductId());
-		assertEquals(null, rate.getPriceList());
-		assertEquals(null, rate.getBrandId());
-		assertEquals(null, rate.getStartDate());
-		assertEquals(null, rate.getEndDate());
-		assertEquals(null, rate.getPrice());
-
-	}
-
-	@Test
 	@DisplayName("Return empty rate when priceList is not selected")
 	void emptyProductRateForNoPriceSelection() {
-		String date = "14-03-2022";
-		String time = "10:00";
-		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_34455, BRAND_ID_1);
 
-		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
-				entry.getBrand())).thenReturn(null);
-
-		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(TestData.TEST_DATE_CRITERIA_NOT_MATCHED, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1)).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
+		
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1);
 
 		assertNotNull(rate);
 
@@ -70,12 +50,15 @@ class SpringbootAppApplicationTests {
 	@Test
 	@DisplayName("petición a las 10:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
-		String date = "14-06-2020";
-		String time = "10:00";
-		RateSelectionRequest entry = RateSelectionRequest.create(date, time, PRODUCT_ID_34455, 1L);
-		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(entry.getDate(), entry.getProduct(),
-				entry.getBrand())).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
-		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(entry);
+		
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1)).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
+		
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1);
+		
+		
+		
 		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), rate.getProductId());
 		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), rate.getPriceList());
 		assertEquals(TestData.PRODUCT_RATE_1.getBrandId(), rate.getBrandId());

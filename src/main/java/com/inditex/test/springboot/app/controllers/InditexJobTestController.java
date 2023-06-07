@@ -1,5 +1,8 @@
 package com.inditex.test.springboot.app.controllers;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +32,11 @@ public class InditexJobTestController implements InditexJobTestControllerSwagger
 	@Override
 	@GetMapping("/getMostPriorityPriceBySelection")
 	@ResponseStatus(value = HttpStatus.OK)
-	public ResponseEntity<ProductRateResponse> findMostPriorityPriceBySelection(@RequestParam("date") String date,
-			@RequestParam("time") String time, @RequestParam("productId") Long productId,
-			@RequestParam("brandId") Long brandId) {
+	public ResponseEntity<ProductRateResponse> findMostPriorityPriceBySelection(
+			@RequestParam("date") @NotNull @Pattern(regexp = "^((0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-[12]\\d{3})$", message = "Invalid date pattern") String date,
+			@RequestParam("time") @NotNull @Pattern(regexp = "^((0[1-9]|1\\d|2[1-3]):([0-5]\\d))$", message = "Invalid time pattern") String time, 
+			@RequestParam("productId") @NotNull Long productId,
+			@RequestParam("brandId") @NotNull Long brandId) {
 
 		ProductRateResponse mostPriorityPriceBySelection = facade.findMostPriorityPriceBySelection(date, time, productId,
 				brandId);

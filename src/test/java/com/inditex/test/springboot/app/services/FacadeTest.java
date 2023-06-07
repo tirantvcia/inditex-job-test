@@ -2,7 +2,6 @@ package com.inditex.test.springboot.app.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inditex.test.springboot.app.TestData;
-import com.inditex.test.springboot.app.dto.request.RateSelectionRequest;
 import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,19 +24,17 @@ class FacadeTest {
 	FacadeImpl facade;
 
 	@Test
-	@DisplayName("petición a las 16:00 del día 14 del producto 35455 para la brand 1")
+	@DisplayName("petición 2 a las 16:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at16Oclock() {
 
-		String date = "14, 06, 2020";
-		String time = "16:00";
-		Long productId = 35455L;
-		Long brandId = 1L;
 		
 		
-		when(service.findMostPriorityPriceBySelection(any(RateSelectionRequest.class))).thenReturn(TestData.PRODUCT_RATE_1);
+		
+		when(service.findMostPriorityPriceBySelection(TestData.TEST_2_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1)).thenReturn(TestData.PRODUCT_RATE_1);
 			
 
-		ProductRateResponse productRate = facade.findMostPriorityPriceBySelection(date, time, productId, brandId);
+		ProductRateResponse productRate = facade.findMostPriorityPriceBySelection("14-06-2020", "16:00", 35455L, 1L);
 		assertNotNull(productRate);
 		
 
@@ -48,11 +44,12 @@ class FacadeTest {
 	}
 	
 	@Test
-	@DisplayName("petición a las 21:00 del día 14 del producto 35455 para la brand 1")
+	@DisplayName("petición 3 a las 21:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at21Oclock() {
 
 
-		when(service.findMostPriorityPriceBySelection(any(RateSelectionRequest.class))).thenReturn(TestData.PRODUCT_RATE_2);
+		when(service.findMostPriorityPriceBySelection(TestData.TEST_3_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1)).thenReturn(TestData.PRODUCT_RATE_2);
 
 		ProductRateResponse productRate = facade.findMostPriorityPriceBySelection("14-06-2020", "21:00", 35455L, 1L);
 		

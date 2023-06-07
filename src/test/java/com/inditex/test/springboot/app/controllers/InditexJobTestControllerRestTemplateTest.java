@@ -33,7 +33,7 @@ public class InditexJobTestControllerRestTemplateTest {
 
 
 	@Test
-	@DisplayName("petición a las 10:00 del día 14 del producto 35455 para la brand 1")
+	@DisplayName("petición 1 a las 10:00 del día 14 del producto 35455 para la brand 1")
 	void getMostPriorityPriceBySelection() throws Exception {
 
 		String date = "14-06-2020";
