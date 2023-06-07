@@ -1,10 +1,6 @@
 package com.inditex.test.springboot.app.dto.request;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
