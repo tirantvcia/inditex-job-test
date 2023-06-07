@@ -2,8 +2,6 @@ package com.inditex.test.springboot.app.dto.response;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.inditex.test.springboot.app.models.Price;
 
@@ -34,12 +32,9 @@ public class ProductRateResponse implements Serializable{
 	}
 
 	public static ProductRateResponse create(Price p) {
-		if (p != null) {
 			return new ProductRateResponse(p.getProductId(), p.getId(), p.getBrand().getId(), p.getStartDate(), p.getEndDate(),
 					p.getPrice());
 
-		}
-		return new ProductRateResponse();
 	}
 
 

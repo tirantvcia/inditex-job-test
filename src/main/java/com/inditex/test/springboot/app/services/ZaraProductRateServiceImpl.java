@@ -30,9 +30,7 @@ public class ZaraProductRateServiceImpl implements ZaraProductRateService {
 		List<Price> findPriceRateBySelectionEntry = this.pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(dateTimeCriteria, productId, brandId);
 
-		return (findPriceRateBySelectionEntry != null && !findPriceRateBySelectionEntry.isEmpty())
-				? findPriceRateBySelectionEntry.stream().map(ProductRateResponse::create).findFirst().get()
-				: new ProductRateResponse();
+		return findPriceRateBySelectionEntry.stream().map(ProductRateResponse::create).findFirst().orElse( new ProductRateResponse());
 	}
 
 

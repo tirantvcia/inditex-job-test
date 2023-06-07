@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,9 @@ class SpringbootAppApplicationTests {
 	void emptyProductRateForNoPriceSelection() {
 
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(TestData.TEST_DATE_CRITERIA_NOT_MATCHED, TestData.PRODUCT_ID_35455,
-				TestData.BRAND_ID_1)).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
+				TestData.BRAND_ID_1)).thenReturn(new ArrayList<>());
 		
-		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_DATE_CRITERIA_NOT_MATCHED, TestData.PRODUCT_ID_35455,
 				TestData.BRAND_ID_1);
 
 		assertNotNull(rate);
@@ -48,23 +50,36 @@ class SpringbootAppApplicationTests {
 	}
 
 	@Test
-	@DisplayName("petición a las 10:00 del día 14 del producto 35455 para la brand 1")
+	@DisplayName("petición 1 a las 10:00 del día 14 del producto 35455 para la brand 1")
 	void checkProductRatesForDate14at10Oclock() {
 		
 		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
 				TestData.BRAND_ID_1)).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_1);
-		
-		ProductRateResponse rate = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+		ProductRateResponse actual = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
 				TestData.BRAND_ID_1);
-		
-		
-		
-		assertEquals(TestData.PRODUCT_RATE_1.getProductId(), rate.getProductId());
-		assertEquals(TestData.PRODUCT_RATE_1.getPriceList(), rate.getPriceList());
-		assertEquals(TestData.PRODUCT_RATE_1.getBrandId(), rate.getBrandId());
-		assertTrue(TestData.PRODUCT_RATE_1.getStartDate().equals(rate.getStartDate()));
-		assertTrue(TestData.PRODUCT_RATE_1.getEndDate().equals(rate.getEndDate()));
-		assertEquals(TestData.PRODUCT_RATE_1.getPrice(), rate.getPrice());
+		assertions(TestData.PRODUCT_RATE_1, actual);
 	}
 
+
+	
+	@Test
+	@DisplayName("petición 2 a las 16:00 del día 14 del producto 35455 para la brand 1")
+	void checkProductRatesForDate14at16Oclock() {
+		
+		when(pricesRepository.findPricesBySelectionOrderedByPrioriry(TestData.TEST_2_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1)).thenReturn(TestData.PRICE_RESULT_LIST_FOR_PETITION_2);
+		
+		ProductRateResponse actual = zaraProductRate.findMostPriorityPriceBySelection(TestData.TEST_2_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
+				TestData.BRAND_ID_1);
+		assertions(TestData.PRODUCT_RATE_2, actual);
+	}
+	
+	private void assertions(ProductRateResponse expected, ProductRateResponse actual) {
+		assertEquals(expected.getProductId(), actual.getProductId());
+		assertEquals(expected.getPriceList(), actual.getPriceList());
+		assertEquals(expected.getBrandId(), actual.getBrandId());
+		assertTrue(expected.getStartDate().equals(actual.getStartDate()));
+		assertTrue(expected.getEndDate().equals(actual.getEndDate()));
+		assertEquals(expected.getPrice(), actual.getPrice());
+	}
 }

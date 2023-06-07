@@ -43,11 +43,14 @@ public class TestData {
 
 	public static final List<Price> PRICE_RESULT_LIST_FOR_PETITION_1 = Stream.of(PRICE_LIST_1)
 			.collect(Collectors.toList());
+	public static final List<Price> PRICE_RESULT_LIST_FOR_PETITION_2 = Stream.of(PRICE_LIST_2, PRICE_LIST_1)
+			.collect(Collectors.toList());
 
 	public static final ProductRateResponse PRODUCT_RATE_1 = ProductRateResponse.create(PRICE_LIST_1);
 	public static final ProductRateResponse PRODUCT_RATE_2 = ProductRateResponse.create(PRICE_LIST_2);
 	public static final ProductRateResponse PRODUCT_RATE_3 = ProductRateResponse.create(PRICE_LIST_3);
 	public static final ProductRateResponse PRODUCT_RATE_4 = ProductRateResponse.create(PRICE_LIST_4);
+	
 
 
 	

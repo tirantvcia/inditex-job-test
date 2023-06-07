@@ -28,13 +28,7 @@ public class SpringBootJpaTest {
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(TestData.TEST_DATE_CRITERIA_NOT_MATCHED, TestData.PRODUCT_ID_35455,
 						TestData.BRAND_ID_1);
-
-
-
 		assertTrue(findFirstPriceRateBySelectionEntry.isEmpty());
-
-
-
 	}
 
 	@Test
@@ -44,9 +38,7 @@ public class SpringBootJpaTest {
 		List<Price> findFirstPriceRateBySelectionEntry = pricesRepository
 				.findPricesBySelectionOrderedByPrioriry(TestData.TEST_1_DATE_CRITERIA, TestData.PRODUCT_ID_35455,
 						TestData.BRAND_ID_1);
-
 		assertTrue(findFirstPriceRateBySelectionEntry.size() == 1);
-		
 		Price actual = findFirstPriceRateBySelectionEntry.get(0);
 		priceAssertValidation(TestData.PRICE_LIST_1, actual);
 	}
