@@ -20,6 +20,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.inditex.test.springboot.app.TestData;
@@ -44,8 +45,9 @@ public class InditexJobTestControllerRestTemplateTest {
 		String time = "100:00";
 		Long productId = 35455L;
 		Long brandId = 1L;
-		assertThrows(ConstraintViolationException.class, () -> {
-			invokeUriExchange(date, time, productId, brandId);
+		assertThrows(RestClientException.class, () -> {
+			ResponseEntity<?> invokeUriExchange = invokeUriExchange(date, time, productId, brandId);
+			assertEquals(invokeUriExchange.getStatusCode(), HttpStatus.BAD_REQUEST);
 			
 		});
 		
