@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import com.inditex.test.springboot.app.dto.response.ProductRateResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,9 +29,14 @@ public interface InditexJobTestControllerSwagger {
 			      schema = @Schema(implementation = ProductRateResponse.class))})
 	})
 	ResponseEntity<ProductRateResponse> findMostPriorityPriceBySelection(
-			 @NotNull @Pattern(regexp = VALID_DATE_PATTERN, message = "Invalid date pattern") String date, 
-			 @NotNull @Pattern(regexp = VALID_TIME_PATERN, message = "Invalid time pattern") String time, 
-			 @NotNull Long productId, 
-			 @NotNull Long brandId);
+			 @NotNull @Pattern(regexp = VALID_DATE_PATTERN, message = "Invalid date pattern") 
+			 @Parameter(name = "date", description = "date of petition in format dd-MM-yyyy" , example = "12-12-2021") String date, 
+			 @NotNull @Pattern(regexp = VALID_TIME_PATERN, message = "Invalid time pattern") 
+			 @Parameter(name = "time", description = "time of petition in format HH:mm", example = "12:12") String time, 
+			 @NotNull @Parameter(name = "productId", description = "product id to check the price" , example = "35455") Long productId, 
+			 @NotNull @Parameter(name = "brandId", description = "brand id where to apply" , example = "1") Long brandId);
+	
+	
+
 
 }
