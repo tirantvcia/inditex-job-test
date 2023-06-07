@@ -12,10 +12,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Selector Precios", description = "Price rate to apply according date, product and brands")
+@Tag(name = "Inditex Proposal test", description = "Test for a Inditex job proposal")
 public interface InditexJobTestControllerSwagger {
 
-	@Operation(summary = "find most priority price rate to apply according ")
+	@Operation(summary = "find most priority price rate to apply according date, product and brands ")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", 
 			    content = { @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
